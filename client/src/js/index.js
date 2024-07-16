@@ -2,6 +2,7 @@ import { Workbox } from 'workbox-window';
 import Editor from './editor';
 import './database';
 import '../css/style.css';
+import { header } from './header';
 
 const main = document.querySelector('#main');
 main.innerHTML = '';
@@ -21,7 +22,13 @@ const editor = new Editor();
 
 if (typeof editor === 'undefined') {
   loadSpinner();
+} else {
+  // Display header in the editor
+  editor.setText(header + '\n' + (editor.getText() || ''));
 }
+
+// Display header in console
+console.log(header);
 
 // Check if service workers are supported
 if ('serviceWorker' in navigator) {
